@@ -2,7 +2,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 
 from flask import Flask, render_template, redirect, request, make_response, session, abort, jsonify
 from flask_restful import reqparse, abort, Api, Resource
-from data import db_session, news_api, news_resources
+from data import db_session, news_api, news_resources, user_resource
 from data.users import User
 from data.news import News
 from forms.LoginForm import LoginForm
@@ -248,6 +248,8 @@ def main():
     app.register_blueprint(news_api.blueprint)
     api.add_resource(news_resources.NewsListResource, '/api/v2/news')
     api.add_resource(news_resources.NewsResource, '/api/v2/news/<int:news_id>')
+    api.add_resource(user_resource.UsersListResource, '/api/v2/users')
+    api.add_resource(user_resource.UserResource, '/api/v2/users/<int:user_id>')
     app.run(host='127.0.0.1', port=8080)
 
 
