@@ -1,3 +1,5 @@
+import os
+
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 from flask import Flask, render_template, redirect, request, make_response, session, abort, jsonify
@@ -254,4 +256,6 @@ def main():
 
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
     main()
